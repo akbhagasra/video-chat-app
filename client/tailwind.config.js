@@ -8,6 +8,9 @@ export default {
                 "2px": "2px",
                 "350px": "350px",
             },
+            width: {
+                "500px": "500px",
+            },
         },
     },
     plugins: [],

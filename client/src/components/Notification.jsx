@@ -1,19 +1,29 @@
 import React from "react";
-import { useSocketContext } from "../SocketContext.jsx";
+import { useSocketContext } from "../SocketContext";
 
 const Notification = () => {
-    const {} = useSocketContext();
+    const { answerCall, callAccepted, leaveCall, call } = useSocketContext();
     return (
-        <div className="bg-slate-400 flex items-center p-2 rounded-xl text-white">
-            <p className="w-3/4 text-2xl">User 1 is calling...</p>
-            <div>
-                <button className="mr-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Accept
-                </button>
-                <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                    Reject
-                </button>
-            </div>
+        <div className="bg-slate-400 flex items-center p-2 rounded text-white justify-between">
+            {call.isReceivedCall && !callAccepted && (
+                <>
+                    <p className="text-2xl">call from user :: {call.name}</p>
+                    <div>
+                        <button
+                            className="mr-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                            onClick={answerCall}
+                        >
+                            Accept
+                        </button>
+                        <button
+                            className="mr-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                            onClick={leaveCall}
+                        >
+                            Reject
+                        </button>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
