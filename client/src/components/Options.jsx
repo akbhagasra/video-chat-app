@@ -12,7 +12,7 @@ const Options = ({ children }) => {
         callAccepted,
     } = useSocketContext();
     return (
-        <div className="container mx-auto bg-slate-400 rounded mt-4 p-4 flex-col justify-center">
+        <div className="mx-auto bg-slate-400 rounded mt-4 p-4 flex-col justify-center">
             <div className="flex justify-between items-start">
                 {/* Left side */}
                 <div className="w-1/2 pr-2">

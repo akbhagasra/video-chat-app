@@ -5,12 +5,9 @@ import React, {
     useRef,
     useEffect,
 } from "react";
-import { io } from "socket.io-client";
 import Peer from "peerjs";
 
 const SocketContext = createContext();
-
-// const socket = io("http://localhost:5000");
 
 const SocketContextProvider = ({ children }) => {
     const [name, setName] = useState("");
@@ -30,6 +27,7 @@ const SocketContextProvider = ({ children }) => {
             .getUserMedia({ audio: true, video: true })
             .then((currentStream) => {
                 setStream(currentStream);
+                if (!myVideo.current) myVideo.current = {};
                 myVideo.current.srcObject = currentStream;
             });
 
@@ -59,8 +57,9 @@ const SocketContextProvider = ({ children }) => {
         callRef.current.answer(stream);
 
         callRef.current.on("stream", (userVideoStream) => {
+            if (!userVideo.current) userVideo.current = {};
             userVideo.current.srcObject = userVideoStream;
-            userVideo.current.play();
+            // userVideo.current.play();
         });
     };
     const callUser = () => {
@@ -73,8 +72,9 @@ const SocketContextProvider = ({ children }) => {
                 name: userToCall,
             });
             setCallAccepted(true);
+            if (!userVideo.current) userVideo.current = {};
             userVideo.current.srcObject = userVideoStream;
-            userVideo.current.play();
+            // userVideo.current.play();
         });
 
         c.on("close", () => {
